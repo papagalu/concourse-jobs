@@ -1,0 +1,14 @@
+---
+platform: linux
+
+image_resource:
+    type: docker-image
+    source: {repository: ubuntu}
+
+inputs:
+    - name: build-scripts
+    - name: build-yml
+    
+run:
+    path: sh
+    args: [./build-scripts/scripts/package_building/ip.sh]

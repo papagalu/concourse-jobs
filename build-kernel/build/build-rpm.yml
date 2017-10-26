@@ -1,0 +1,6 @@
+---
+platform: windows
+    
+run:
+    path: echo
+    args: ["HELLO"]

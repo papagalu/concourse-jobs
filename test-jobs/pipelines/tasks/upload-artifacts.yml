@@ -1,0 +1,14 @@
+---
+platform: linux
+
+image_resource:
+    type: docker-image
+    source: {repository: ubuntu}
+
+inputs:
+    - name: build-yml
+    - name: artifacts 
+    
+run:
+    path: sh
+    args: ["build-yml/pipelines/tasks/upload-artifacts.sh"]

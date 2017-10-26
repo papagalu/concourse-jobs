@@ -1,0 +1,26 @@
+resources:
+- name: build-scripts
+  type: git
+  source:
+    uri: https://github.com/mbivolan/lis-pipeline.git
+    branch: container-build
+- name: build-yml
+  type: git
+  source:
+    uri: https://github.com/mbivolan/concourse.git
+    branch: master
+
+jobs:
+- name: build-kernel
+  plan:
+  - aggregate:
+    - get: build-scripts
+    - get: build-yml
+  - task: build deb
+    file: build-yml/pipelines/tasks/build-deb.yml
+    params:
+      KERNEL_PATH: https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.13.9.tar.xz
+  - task: up-artifacts
+    privileged: true
+    file: build-yml/pipelines/tasks/upload-artifacts.yml
+        
